@@ -15,7 +15,11 @@
         <ul class="nav nav-pills">
             <li class="nav-item"><a href="/" class="nav-link">Home</a></li>
             <li class="nav-item"><a href="/about" class="nav-link">About</a></li>
+            <li class="nav-item"><a href="/categories" class="nav-link">News categories</a></li>
+            <li class="nav-item"><a href="/news" class="nav-link">All news</a></li>
+            <li class="nav-item"><a href="/news/showFormForCreate" class="nav-link">Create news</a></li>
             <li class="nav-item"><a href="/review" class="nav-link">Reviews</a></li>
+            <li class="nav-item"><a href="/authorization" class="nav-link">Authorization</a></li>
         </ul>
     </header>
 </div>
