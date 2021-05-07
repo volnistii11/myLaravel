@@ -1,18 +1,16 @@
-@extends('layout')
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Categories') }}
+        </h2>
+    </x-slot>
 
-@section('title')
-    Категории новостей
-@endsection
-
-@section('main_content')
-    <h1>Категории новостей</h1>
-    <ul>
-        @foreach ($categories as $category)
-            <li>
-                <a href="{{ route('categories.show', ['category' => $category->id]) }}">{{ $category->name }}</a>
-            </li>
-        @endforeach
-    </ul>
-@endsection
-
+    <x-content-body>
+        <ul>
+            @foreach ($categories as $category)
+                <x-categories.categories-preview :categories="$category"/>
+            @endforeach
+        </ul>
+    </x-content-body>
+</x-app-layout>
 
