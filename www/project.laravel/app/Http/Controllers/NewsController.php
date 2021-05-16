@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\News\StoreNewsRequest;
+use App\Http\Requests\NewsShowRequest;
 use App\Models\Category;
 use App\Models\News;
 use Illuminate\Http\Request;
@@ -19,25 +21,17 @@ class NewsController extends Controller
         return view('news.show', compact('news'));
     }
 
-    public function showFormForCreate()
+
+    public function create()
     {
-        $categories = Category::all('id','name');
+        $categories = Category::all();
         return view('news.create', compact('categories'));
     }
 
-    public function create(Request $request){
-        $valid = $request->validate([
-            'title' => 'required|min:4|max:100',
-            'description' => 'required|min:20|max:300'
-        ]);
+    public function store(StoreNewsRequest $request)
+    {
+        News::create($request->validated());
 
-        $news = new News();
-        $news->category_id = $request->input('category_id');
-        $news->title = $request->input('title');
-        $news->description = $request->input('description');
-
-        $news->save();
-
-        return redirect()->route('news.showFormForCreate');
+        return redirect()->route('news.index');
     }
 }
