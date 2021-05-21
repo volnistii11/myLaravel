@@ -28,10 +28,6 @@ Route::get('/dashboard', function () {
 
 Route::get('/about', [MainController::class,'about'])->name('about');
 
-//указываем название url адреса "->name('review')", чтобы потом сделать на него редирект (файл ReviewController 29строка)
-Route::get('/review', [ReviewController::class,'review'])->name('review');
-Route::post('/review/check', [ReviewController::class,'review_check']);
-
 //Route::get('/user/{id}/{name}', function ($id, $name) {
 //    return 'ID: ' . $id . '.name: ' . $name;
 //});
