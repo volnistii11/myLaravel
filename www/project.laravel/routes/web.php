@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\NewsController;
+use App\Http\Controllers\ReviewController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,14 +17,31 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [MainController::class,'home']);
+Route::get('/', function () {
+    return view('welcome');
+});
 
-Route::get('/about', [MainController::class,'about']);
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
-//указываем название url адреса "->name('review')", чтобы потом сделать на него редирект (файл MainController 36строка)
-Route::get('/review', [MainController::class,'review'])->name('review');
-Route::post('/review/check', [MainController::class,'review_check']);
+
+Route::get('/about', [MainController::class,'about'])->name('about');
 
 //Route::get('/user/{id}/{name}', function ($id, $name) {
 //    return 'ID: ' . $id . '.name: ' . $name;
 //});
+
+Route::get('/news',[NewsController::class, 'index'])->name('news.index');
+Route::get('/news/create', [NewsController::class, 'create'])->name('news.create');
+Route::post('/news/create', [NewsController::class, 'store'])->name('news.store');
+Route::get('/news/{news}',[NewsController::class, 'show'])->name('news.show');
+
+
+//Route::get('/news/showFormForCreate', [NewsController::class, 'showFormForCreate'])->name('news.showFormForCreate');
+//Route::post('/news/create', [NewsController::class, 'create'])->name('news.create');
+
+Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
+Route::get('/categories/{category}',[CategoryController::class, 'show'])->name('categories.show');
+
+require __DIR__.'/auth.php';
